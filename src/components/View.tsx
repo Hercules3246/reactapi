@@ -1,10 +1,27 @@
 import React, { useState } from 'react'
 import Filters from './Filters';
+import * as ClashApi from '../api/Clash';
+import Table from './Table';
 
 const View = () => {
     interface IFilters {
         nombre: string
     }
+const showMsg = (type:number, msg:string) => {
+        if (type == 1) {
+            return(
+            <div className="alert alert-success" role="alert">
+             msg   
+            </div>
+            )
+        } else {
+            
+            <div className="alert alert-warning" role="alert">
+                msg   
+            </div>
+            
+        }
+ }
 
     const [filters, setFilters] = useState<IFilters>({
         nombre: ""
@@ -16,11 +33,7 @@ const View = () => {
         puntos: number
     };
 
-    interface IClans {
-        array: IClan[]
-    }
-
-    const [data, setData] = useState<IClans>([]);
+    const [data, setData] = useState<IClan>([] as any);
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget;
@@ -33,12 +46,49 @@ const View = () => {
 
     const { nombre } = filters;
 
+    const fetchData =  () => {
+        ClashApi.fetchData(nombre)
+        .then((response) => {
+            const { items } = response;
+            setData(items);
+        })
+        .catch((error) => {
+            if(error.response.status == 400){
+                if(error.response.data.reason == "badRequest"){
+                    // console.log(error.response.data.message);
+                    showMsg(2, error.response.data.message);
+                  
+                    
+                }
+            }
+           
+                
+        })
+        .finally(() => {
+
+        })
+    }
+
+
     return (
-        <div>
-            <Filters
-                nombre={nombre}
-                onChange={handleChange}
-            />
+        <div className='container'>
+            <div className="row">
+                <div className="col">
+                    <div className='card d-flex justify-content-center'>
+                    <div className="card-header">
+                        <h4>Listado de clanes</h4>
+                    </div>
+                    <Filters
+                        nombre={nombre}
+                        onChange={handleChange}
+                        fetchData={fetchData}
+                    />
+                      <div className="card-body">
+                    <Table />
+                    </div>
+                    </div>
+                </div>  
+            </div>
         </div>
     )
 }
