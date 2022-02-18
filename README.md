@@ -1,3 +1,8 @@
+Este proyecto es una prueba tecnica para la empresa NTTDATA - Colombia.
+segun las especificaciones, el proyecto fue desarrollado con React utilizando el tipado de TYPESCRIPT y la libreria de estilos bootstrap, como plus utilice la libreria sweetAlert2 para mostrar los mensajes de error; cabe resaltar que la paginacion desarrollada es basica, pienso que seria mejor utilizar una libreria para mostrar los datos.
+
+Espero les guste, estare a su entera disposicion.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
