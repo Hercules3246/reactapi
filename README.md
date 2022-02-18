@@ -1,5 +1,5 @@
 Este proyecto es una prueba tecnica para la empresa NTTDATA - Colombia.
-segun las especificaciones, el proyecto fue desarrollado con React utilizando el tipado de TYPESCRIPT y la libreria de estilos bootstrap, como plus utilice la libreria sweetAlert2 para mostrar los mensajes de error; cabe resaltar que la paginacion desarrollada es basica, pienso que seria mejor utilizar una libreria para mostrar los datos.
+segun las especificaciones, el proyecto fue desarrollado con React utilizando el tipado de TYPESCRIPT y la libreria de estilos bootstrap, como plus utilice la libreria sweetAlert2 para mostrar los mensajes de error; cabe resaltar que la paginacion desarrollada es basica. Pienso que seria mejor utilizar una libreria para mostrar los datos y tambien me gustaria mencionar que las variables de la api deberian estar encapsulada en un arhivo que contenga las Variable de entorno (.env).
 
 Espero les guste, estare a su entera disposicion.
 
