@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import Filters from './Filters';
 import * as ClashApi from '../api/Clash';
 import Table from './Table';
-
+import Swal from "sweetalert2"; 
+import withReactContent from 'sweetalert2-react-content'
 const View = () => {
     interface IFilters {
         nombre: string
@@ -15,18 +16,18 @@ const showMsg = (type:number, msg:string) => {
             </div>
             )
         } else {
-            
-            <div className="alert alert-warning" role="alert">
-                msg   
-            </div>
-            
+            MySwal.fire({
+                title: <strong>Error</strong>,
+                html: <i>{msg}</i>,
+                icon: 'error'
+              })
         }
  }
 
     const [filters, setFilters] = useState<IFilters>({
         nombre: ""
     });
-
+    const MySwal = withReactContent(Swal)
     interface IClan {
         nombre: string,
         nivel: number,
@@ -57,8 +58,6 @@ const showMsg = (type:number, msg:string) => {
                 if(error.response.data.reason == "badRequest"){
                     // console.log(error.response.data.message);
                     showMsg(2, error.response.data.message);
-                  
-                    
                 }
             }
            
@@ -84,7 +83,7 @@ const showMsg = (type:number, msg:string) => {
                         fetchData={fetchData}
                     />
                       <div className="card-body">
-                    <Table />
+                    <Table datos={data} />
                     </div>
                     </div>
                 </div>  

@@ -1,6 +1,11 @@
 import React from 'react';
+interface Idata {
+  datos: any,
+}
 
-const Table = () => {
+
+const Table = ({ datos }: Idata) => {
+  
   return (
   
     <table className="table  table-striped table-bordered">
@@ -15,32 +20,21 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>#454523</td>
-          <td>Clan colo</td>
-          <td>Open</td>
-          <td>5</td>
-          <td>300</td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td>#454523</td>
-          <td>Clan colo</td>
-          <td>Open</td>
-          <td>5</td>
-          <td>300</td>
-          <td>10</td>
-        </tr>
+   
+      {datos.map((items:any, i:number) => {
+            return (
+              <tr key={i} >
+                <td>{items.tag}</td>
+                <td>{items.name}</td>
+                <td>{items.type}</td>
+                <td>{items.clanLevel}</td>
+                <td>{items.clanPoints}</td>
+                <td>{items.members}</td>
 
-        <tr>
-          <td>#454523</td>
-          <td>Clan colo</td>
-          <td>Open</td>
-          <td>5</td>
-          <td>300</td>
-          <td>10</td>
-        </tr>
 
+              </tr>
+            )
+          })}
       </tbody>
     </table>
 
