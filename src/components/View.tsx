@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Filters from './Filters';
+import Pagination from './Pagination';
 import * as ClashApi from '../api/Clash';
 import Table from './Table';
 import Swal from "sweetalert2"; 
@@ -29,13 +30,12 @@ const showMsg = (type:number, msg:string) => {
     });
     const MySwal = withReactContent(Swal)
  
-    interface IClan {
-        nombre: string,
-        nivel: number,
-        puntos: number
-    };
+   
 
-    const [data, setData] = useState<IClan>([] as any);
+
+    const [datos, setDatos] = useState<any>([] as any);
+    const [currentPage, setCurrentPage] = useState<number>(1 as number);
+    const [postsPerPage] = useState<number>(10 as number);
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget;
@@ -63,7 +63,9 @@ const showMsg = (type:number, msg:string) => {
         .then((response) => {
             MySwal.close();
             const { items } = response;
-            setData(items);
+            setDatos(items);
+
+            
         })
         .catch((error) => {
             MySwal.close();
@@ -74,9 +76,9 @@ const showMsg = (type:number, msg:string) => {
                 }
             }
         })
-    }
+    }   
     const borrarData = () => {
-        setData([] as any);
+        setDatos([] as any);
         setFilters({
             nombre: "",
             nivel: 0,
@@ -84,7 +86,14 @@ const showMsg = (type:number, msg:string) => {
         })
     }
 
-
+     // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = datos.slice(indexOfFirstPost, indexOfLastPost);
+    // Change page
+//  const paginate = (pageNumber: React.FormEvent<HTMLInputElement>) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber:any) => setCurrentPage(pageNumber);
+    
     return (
         <div className='container'>
             <div className="row">
@@ -102,7 +111,11 @@ const showMsg = (type:number, msg:string) => {
                         borrar={borrarData}
                     />
                       <div className="card-body">
-                    <Table datos={data} />
+                    <Table datos={currentPosts} />
+                    <Pagination  postsPerPage={postsPerPage}
+                                totalPosts={datos.length}
+                                paginate={paginate}
+                                />
                     </div>
                     </div>
                 </div>  
