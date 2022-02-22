@@ -30,8 +30,6 @@ const Table = ({ datos }: Idata) => {
                 <td>{items.clanLevel}</td>
                 <td>{items.clanPoints}</td>
                 <td>{items.members}</td>
-
-
               </tr>
             )
           })}

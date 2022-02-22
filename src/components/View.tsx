@@ -28,6 +28,7 @@ const showMsg = (type:number, msg:string) => {
         nivel: 0,
         puntos: 0
     });
+
     const MySwal = withReactContent(Swal)
  
    
@@ -40,6 +41,7 @@ const showMsg = (type:number, msg:string) => {
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget;
 
+
         setFilters(prevState => ({
             ...prevState,
             [name]: value,
@@ -49,6 +51,7 @@ const showMsg = (type:number, msg:string) => {
     const { nombre, nivel, puntos } = filters;
 
     const fetchData =  () => {
+
     //   MySwal.showLoading();
     MySwal.fire({
         title: 'Cargando...',
@@ -64,7 +67,7 @@ const showMsg = (type:number, msg:string) => {
             MySwal.close();
             const { items } = response;
             setDatos(items);
-
+            setCurrentPage(1);
             
         })
         .catch((error) => {

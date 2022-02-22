@@ -13,8 +13,6 @@ const Filters = ({ nombre, nivel, puntos , onChange, fetchData, borrar }: IFilte
     return (
         <div>
             <div className='container '>
-             
-                   
                     <div className='row p-5'>
                         <div className='col-lg-3 col-md-6 col-sm-12  mt-1' >
                             <label htmlFor="nombre">Ingresa el nombre del clan</label>
